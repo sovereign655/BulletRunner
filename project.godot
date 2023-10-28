@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Projects"
+config/name="BulletRunner"
 run/main_scene="res://player.tscn"
 config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
