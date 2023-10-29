@@ -9,18 +9,18 @@ public partial class player : Area2D
     public int Speed { get; set; } = 400; //The set speed of the player
 
     public Vector2 ScreenSize; //Size of game window
-    private void OnBodyEntered(PhysicsBody2D body)
+    private void _on_body_entered(PhysicsBody2D body)
     {
         Hide(); // Player disappears after being hit.
-        EmitSignal(SignalName.Hit);
+        EmitSignal(nameof(Hit));
         // Must be deferred as we can't change physics properties on a physics callback.
-        GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+        SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
     }
     public void Start(Vector2 position)
     {
         Position = position;
         Show();
-        GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+        SetDeferred(CollisionShape2D.PropertyName.Disabled, false);
     }
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
