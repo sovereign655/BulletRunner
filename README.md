@@ -2,7 +2,7 @@
 
 Welcome to Bullet Runner - a fun and engaging 2D dodge-and-survive game developed with the Godot Engine. Take control of a sprightly little squid and navigate through an ocean teeming with foes. The longer you survive, the higher your score climbs. Are you ready to set a new high score?
 
-bulletrunnercover.png
+/bulletrunnercover.png
 
 # Features
 Player-Controlled Squid: Move your character with intuitive controls and dodge the enemy squids.
