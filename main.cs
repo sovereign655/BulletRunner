@@ -37,17 +37,31 @@ public partial class main : Node
     {
         GetNode<Timer>("MobTimer").Stop();
         GetNode<Timer>("ScoreTimer").Stop();
+        GetNode<hud>("HUD").ShowGameOver();
+        GetNode<AudioStreamPlayer>("DeathSound").Play();
     }
 
     public void NewGame()
     {
+        
+        
         _score = 0;
+        GetTree().CallGroup("mobs", Node.MethodName.QueueFree);
+
+        var hud = GetNode<hud>("HUD");
+        hud.UpdateScore(_score);
+        hud.ShowMessage("Get Ready!");
 
         var player = GetNode<player>("Player");
         var startPosition = GetNode<Marker2D>("StartPosition");
         player.Start(startPosition.Position);
 
         GetNode<Timer>("StartTimer").Start();
+        var music = GetNode<AudioStreamPlayer>("Music");
+        
+        if (!music.Playing) {
+            music.Play();
+        }
     }
 
     private void _on_start_timer_timeout()
@@ -59,20 +73,21 @@ public partial class main : Node
     private void _on_score_timer_timeout()
     {
         _score++;
+        GetNode<hud>("HUD").UpdateScore(_score);
     }
 
     [Export]
-	public PackedScene MobScene { get; set; }
+    public PackedScene MobScene { get; set; }
 
-	private int _score;
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-        NewGame();
+    private int _score;
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
+    {
+        // NewGame();
     }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(double delta)
+    {
+    }
 }

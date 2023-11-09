@@ -27,6 +27,7 @@ public partial class player : Area2D
     {
         Hide();//player starts the game hidden
         ScreenSize = GetViewportRect().Size;
+        
 
     }
 
